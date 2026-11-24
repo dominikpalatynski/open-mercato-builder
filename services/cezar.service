@@ -1,0 +1,18 @@
+[Unit]
+Description=Cezar
+After=network.target
+
+[Service]
+Type=exec
+User=open-mercato-builder
+Group=open-mercato-builder
+WorkingDirectory=/home/open-mercato-builder/workspace
+Environment=HOME=/home/open-mercato-builder
+Environment=CEZ_REMOTE=1
+Environment=CEZ_HIDE_TOKEN_METRICS=1
+PassEnvironment=CEZ_VERSION
+ExecStart=/bin/bash -c 'exec /usr/local/bin/npx --yes "cezar-cli@$${CEZ_VERSION:-0.20.0}" --port 4321 --no-open --repo /home/open-mercato-builder/workspace'
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

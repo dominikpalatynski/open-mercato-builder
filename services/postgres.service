@@ -1,0 +1,13 @@
+[Unit]
+Description=PostgreSQL 17
+After=network.target
+
+[Service]
+Type=exec
+User=postgres
+Group=postgres
+ExecStart=/usr/lib/postgresql/17/bin/postgres -D /var/lib/postgresql/17/main -c listen_addresses=127.0.0.1
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
